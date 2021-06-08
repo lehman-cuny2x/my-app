@@ -4,12 +4,14 @@ import ReactDOM from 'react-dom';
 // import ComponentName from FileName
 import Cars from './Car';
 import reportWebVitals from './reportWebVitals';
-
+const name1 = "Jeep";
+const color1 = "yellow"
 ReactDOM.render(
+  //
   <React.StrictMode>
-    <Cars name="Toyota" />
+    <Cars name={name1} color={color1} />
   </React.StrictMode>,
-  document.getElementById('container')
+  document.getElementById('root')
 );
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))

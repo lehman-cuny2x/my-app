@@ -79,8 +79,62 @@ function Cars(){
 export default Cars;*/
 
 class Car extends Component{
+
+  constructor(props){
+    super(props);
+
+    // state object
+    this.state = {
+      name:props.name,
+      model:"Sahara",
+      color: props.color,
+      year:1990,
+    }
+
+
+    setInterval(this.changeYear.bind(this) , 4000);
+  }
+
+
+  /*
+
+  How do we change the state object?
+  If we want to change a value of the state object, we have to use
+  the this.setState() method
+
+
+  */
+
+  changeColor = () => {
+    this.setState({color: "blue"});
+  }
+
+  changeYear = () => {
+    let s = this.state.year;
+    s = parseInt(s);
+    s--;
+
+    this.setState({year: s});
+  }
+
+
   render(){
-    return <h1>My Car is a {this.props.name}</h1>;
+    return <div>
+          <h1>My Car is a {this.state.name}. 
+          It was  made in {this.state.year}. 
+          It is {this.state.color} in color
+          </h1>
+
+          <button type="button" onClick={this.changeColor}>Change Color</button>
+
+          <button type="button" onClick={this.changeYear}>Change Year</button>
+
+
+
+    </div>
+    
+    
+;
   }
 }
 export default Car;
