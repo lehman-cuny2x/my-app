@@ -89,10 +89,29 @@ class Car extends Component{
       model:"Sahara",
       color: props.color,
       year:1990,
+      firstName:"",
+      lastName:"",
+      email:""
     }
 
 
     setInterval(this.changeYear.bind(this) , 4000);
+    this.handleFormChanges = this.handleFormChanges.bind(this);
+  } // End of constructor
+
+
+  /* The following method is called when the component has been
+  rendered
+  */
+  componentDidMount(){
+    setTimeout(()=>{
+      this.setState({color: "pink"});
+
+    }, 2000)
+  }
+
+  componentDidUpdate(){
+    document.getElementById("idOne").style.backgroundColor = "red";
   }
 
 
@@ -118,14 +137,88 @@ class Car extends Component{
   }
 
 
+  /*If you use regular functions other than the arrow functions,
+  you must use this and bind method to bind the component instance
+
+  */
+  handleFormChanges(event){
+    // This accesses the name of the input  field
+    let nam = event.target.name; 
+
+    //The following accesses the value inside the input field
+    let val = event.target.value;
+    
+
+    /*
+     = Assignment operator
+     == this compares values without about their data type 3 == '3', true
+     === this compares the values and their data type 3 === '3', false
+    */
+    /*if(fname === ""){
+      alert("You must enter your first name");
+    }
+    
+    
+    switch in JS, uses === to compare the cases.
+    */
+
+    this.setState({ [nam]:val });
+  }
+
+  /* 
+  The following is an arrow function
+  */
+  formSubmitHandler = (event) =>{
+    event.preventDefault();// This prevent the form from actual submission
+
+    
+    
+    
+    alert("The form has been submitted" + this.state.firstName);
+  } 
+
+
   render(){
     return <div>
-          <h1>My Car is a {this.state.name}. 
+          <h1 id="idOne">My Car is a {this.state.name}. 
           It was  made in {this.state.year}. 
           It is {this.state.color} in color
           </h1>
 
-          <button type="button" onClick={this.changeColor}>Change Color</button>
+          <form onSubmit={this.formSubmitHandler}>
+            <h2>Contact Me</h2>
+            
+            <div>
+              <p>First Name:</p>
+              <input type="text" 
+              value={this.state.firstName} 
+              onChange={this.handleFormChanges}
+              name="firstName"
+              />
+            </div>
+
+            <div>
+              <p>Last Name:</p>
+              <input type="text" 
+              value={this.state.lastName} 
+              onChange={this.handleFormChanges}
+              name="lastName"
+              />
+            </div> 
+
+            <div>
+              <p>Email:</p>
+              <input type="text" 
+              value={this.state.email} 
+              onChange={this.handleFormChanges}
+              name="email"
+              />
+            </div>                 
+          
+            <input type="submit" />
+          </form>
+
+          <button type="button" onMouseOver={this.changeColor}>Change Color</button>
 
           <button type="button" onClick={this.changeYear}>Change Year</button>
 
@@ -138,3 +231,18 @@ class Car extends Component{
   }
 }
 export default Car;
+
+
+
+/* A component is updated anytime there is a change in the component's
+state or props.
+
+There has five methods that get called when a component has be updated:
+1. getDerivedStateFromProps()
+2. shouldComponentUpdate()
+3. render()
+4. getSnapshotBeforeUpdate()
+5. componentDidUpdate()
+
+*/
+
