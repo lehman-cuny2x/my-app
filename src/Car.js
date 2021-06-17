@@ -172,9 +172,46 @@ class Car extends Component{
     event.preventDefault();// This prevent the form from actual submission
 
     
+    /* We can add a code for submitting our form to the database
+    */
+   //fetch("url").then.then()
+
+   //let putTheValuesVariableHere = [];
+   let values = this.state;
+   //console.log("Testing the state");
+   alert("We submitted a from with this data" + values.firstName);
+
+
+   (async () => {
+    //console.log(values);
+    const rawResponse = await fetch('/formSubmit', {
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(values)
+    });
+    const content = await rawResponse.json();
+  
+    console.log(content);
+  })();
+
+   /*(async () => {
+   fetch('/formSubmit', 
+    {
+      method: 'POST',
+      body: JSON.stringify(values),
+      header: {
+        'Content-Type': 'application/json'
+      }
+    }
+    ).then(res => res.json())
+    .then(data => console.log(data))
+    .catch(err => console.log(err));*/
     
-    
-    alert("The form has been submitted" + this.state.firstName);
+    /**/
+    //alert("The form has been submitted" + this.state.firstName);
   } 
 
 
